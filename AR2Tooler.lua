@@ -1,6 +1,7 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Papolele/Roblokcs-UI/main/source.lua"))()
 local Window = Library.CreateLib("ApocTool", "Sentinel")
---https://xheptcofficial.gitbook.io/kavo-library/
+--Naw
+
 
 
 local Tab = Window:NewTab("ApocTools")
