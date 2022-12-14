@@ -7,16 +7,17 @@ local Tab = Window:NewTab("ApocTools")
 
 local section = Tab:NewSection(Reset)
 section:NewButton("Refresh", "Refresh the whole script for you and only you <3", function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Papolele/Roblokcs/main/AR2Tooler.lua"))()
+	
 end)
 
 Players = game:GetService("Players")
 for i, player in pairs(Players:GetPlayers()) do
-	primary = tostring(player.Status.playerCell.Value or "")
+	primary = tostring(player.Stats.Primary.Value or "")
 		if primary == "" then
 			primary = "none"
 		end
-	secondary = tostring(player.Status.innocentKills.Value or "")
+	secondary = tostring(player.Stats.Secondary.Value or "")
 		if secondary == "" then
 			secondary = "none"
 		end
