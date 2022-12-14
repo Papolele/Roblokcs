@@ -1,0 +1,39 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("ApocTool", "Sentinel")
+--https://xheptcofficial.gitbook.io/kavo-library/
+
+
+local Tab = Window:NewTab("ApocTools")
+
+Section:NewButton("ButtonText", "ButtonInfo", function()
+ loadstring(game:HttpGet(""))()
+
+Players = game:GetService("Players")
+for i, player in pairs(Players:GetPlayers()) do
+	primary = tostring(player.Status.playerCell.Value or "")
+		if primary == "" then
+			primary = "none"
+		end
+	secondary = tostring(player.Status.innocentKills.Value or "")
+		if secondary == "" then
+			secondary = "none"
+		end
+	local namesec = Tab:NewSection(player.Name)
+	namesec:NewLabel(primary)
+	namesec:NewLabel(secondary)
+
+	namesec:NewButton("Refresh", "Reload tools", function()
+		namesec:UpdateSection("Section New title")
+	end)
+end
+
+local Tab = Window:NewTab("Setting")
+local Section = Tab:NewSection("Setting")
+Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.F1, function()
+	Library:ToggleUI()
+
+end)
+
+local Tab = Window:NewTab("Credit")
+local Section = Tab:NewSection("Credit")
+Section:NewLabel("This script was made by Papolele#0066")
