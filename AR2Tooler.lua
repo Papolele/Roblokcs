@@ -5,8 +5,10 @@ local Window = Library.CreateLib("ApocTool", "Sentinel")
 
 local Tab = Window:NewTab("ApocTools")
 
-Section:NewButton("ButtonText", "ButtonInfo", function()
- loadstring(game:HttpGet(""))()
+local section = Tab:NewSection(Reset)
+section:NewButton("Refresh", "Refresh the whole script for you and only you <3", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+end)
 
 Players = game:GetService("Players")
 for i, player in pairs(Players:GetPlayers()) do
@@ -21,10 +23,6 @@ for i, player in pairs(Players:GetPlayers()) do
 	local namesec = Tab:NewSection(player.Name)
 	namesec:NewLabel(primary)
 	namesec:NewLabel(secondary)
-
-	namesec:NewButton("Refresh", "Reload tools", function()
-		namesec:UpdateSection("Section New title")
-	end)
 end
 
 local Tab = Window:NewTab("Setting")
