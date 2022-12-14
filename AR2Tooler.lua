@@ -1,4 +1,4 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Papolele/Roblokcs-UI/main/source.lua"))()
 local Window = Library.CreateLib("ApocTool", "Sentinel")
 --https://xheptcofficial.gitbook.io/kavo-library/
 
@@ -7,8 +7,10 @@ local Tab = Window:NewTab("ApocTools")
 
 local section = Tab:NewSection(Reset)
 section:NewButton("Refresh", "Refresh the whole script for you and only you <3", function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/Papolele/Roblokcs/main/AR2Tooler.lua"))()
 	
+	
+	game.CoreGui.AR2s:Destroy()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Papolele/Roblokcs/main/AR2Tooler.lua"))()
 end)
 
 Players = game:GetService("Players")
@@ -36,3 +38,6 @@ end)
 local Tab = Window:NewTab("Credit")
 local Section = Tab:NewSection("Credit")
 Section:NewLabel("This script was made by Papolele#0066")
+
+wait(1)
+local ScreenGui = game.CoreGui.AR2s
