@@ -31,7 +31,7 @@ end
 
 local Tab = Window:NewTab("Setting")
 local Section = Tab:NewSection("Setting")
-Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.F1, function()
+Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.LeftBracket, function()
 	Library:ToggleUI()
 
 end)
