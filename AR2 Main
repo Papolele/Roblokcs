@@ -10,9 +10,9 @@ local settings = {
       location = {enabled = true, color = Color3.new(1,1,1), distance = 3000},
       zombie = {enabled = false, color = Color3.new(1,0,0), distance = 1000},
       player = {enabled = true, color = Color3.new(255,0,0), distance = 2500},
-      randomevents = {enabled = true, color = Color3.new(0,0,255), distance = 1000},
+      randomevents = {enabled = true, color = Color3.new(255,255,0), distance = 1000},
       vehicles = {enabled = true, color = Color3.new(0,255,0), distance = 1500},
-      corpses = {enabled = true, color = Color3.new(255,255,0), distance = 15000}
+      corpses = {enabled = true, color = Color3.new(128, 0, 128), distance = 2500}
 }
 --
 local location_drawings = {}
@@ -182,7 +182,7 @@ run_service.RenderStepped:Connect(function()
                   if v.Visible then
                         v.Position = Vector2.new(pos.X,pos.Y)
                         v.Text = tostring(_.Name ..' ['..mag..' studs]')
-                        v.Color = settings.vehicle.color or Color3.new(0,255,0)
+                        v.Color = settings.vehicles.color or Color3.new(0,255,0)
                   end
             end
       end
@@ -194,7 +194,7 @@ run_service.RenderStepped:Connect(function()
 				if v.Visible then
 					v.Position = Vector2.new(pos.X, pos.Y)
 					v.Text = tostring(_.Name .. " [" .. mag .. " studs]")
-					v.Color = settings.corpses.color or Color3.new(255, 0, 0)
+					v.Color = settings.corpses.color or Color3.new(128, 0, 128)
 				end
             end
       end
