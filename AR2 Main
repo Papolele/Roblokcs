@@ -12,7 +12,7 @@ local settings = {
       player = {enabled = true, color = Color3.new(255,0,0), distance = 2500},
       randomevents = {enabled = true, color = Color3.new(0,0,255), distance = 1000},
       vehicles = {enabled = true, color = Color3.new(0,255,0), distance = 1500},
-	  corpses = {enabled = true, color = Color3.new(255,255,0), distance = 15000}
+      corpses = {enabled = true, color = Color3.new(255,255,0), distance = 15000}
 }
 --
 local location_drawings = {}
@@ -110,7 +110,7 @@ workspace.Corpses.ChildRemoved:Connect(function(v)
 end)
 
 local lastUpdateTime = 0
-local updateInterval = 0.1
+local updateInterval = 0.01
 
 -- // runservice shit (bad methods :sob:)
 run_service.RenderStepped:Connect(function()
@@ -160,7 +160,7 @@ run_service.RenderStepped:Connect(function()
                         else 
                         	v.Text = tostring("opposition" ..' ['..mag..' studs]')
                         end
-                        v.Color = Color3.new(128,0,128)
+                        v.Color = settings.player.color or Color3.new(255,0,0)
                 end
             end
       end
@@ -171,7 +171,7 @@ run_service.RenderStepped:Connect(function()
             if v.Visible then
                   v.Position = Vector2.new(pos.X,pos.Y)
                   v.Text = tostring(_.Name ..' ['..mag..' studs]')
-                  v.Color = Color3.new(255,255,0)
+                  v.Color = settings.randomevents.color or Color3.new(255,255,0)
             end
       end
       for _,v in next, vehicle_drawings do
@@ -182,7 +182,7 @@ run_service.RenderStepped:Connect(function()
                   if v.Visible then
                         v.Position = Vector2.new(pos.X,pos.Y)
                         v.Text = tostring(_.Name ..' ['..mag..' studs]')
-                        v.Color = Color3.new(0,255,0)
+                        v.Color = settings.vehicle.color or Color3.new(0,255,0)
                   end
             end
       end
