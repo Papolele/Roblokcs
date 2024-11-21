@@ -11,7 +11,8 @@ local settings = {
       zombie = {enabled = false, color = Color3.new(1,0,0), distance = 1000},
       player = {enabled = true, color = Color3.new(255,0,0), distance = 2500},
       randomevents = {enabled = true, color = Color3.new(0,0,255), distance = 1000},
-      vehicles = {enabled = true, color = Color3.new(0,255,0), distance = 1500}
+      vehicles = {enabled = true, color = Color3.new(0,255,0), distance = 1500},
+	  corpses = {enabled = true, color = Color3.new(255,255,0), distance = 15000}
 }
 --
 local location_drawings = {}
@@ -19,6 +20,7 @@ local zombie_drawings = {}
 local player_drawings = {}
 local randomevent_drawings = {}
 local vehicle_drawings = {}
+local corpses_drawings = {}
 -- // functions
 function draw(instance, properties)
       local drawing = Drawing.new(instance)
@@ -60,7 +62,12 @@ end
 for _,v in next, workspace.Vehicles.Spawned:GetChildren() do
       createtext(v, vehicle_drawings)
 end
-
+--// Corpses scwipt
+for _,v in next, workspace.Corpses:GetChildren() do
+    if v.Name ~= "Zombie" then
+		createtext(v, corpses_drawings)
+	end
+end
 
 -- // add and delete espiesies
 --zombies
@@ -94,9 +101,22 @@ end)
 workspace.Vehicles.Spawned.ChildRemoved:Connect(function(v)
       removetext(v, vehicle_drawings)
 end)
+--corpses
+workspace.Corpses.ChildAdded:Connect(function(v)
+      createtext(v, corpses_drawings)
+end)
+workspace.Corpses.ChildRemoved:Connect(function(v)
+      removetext(v, corpses_drawings)
+end)
+
+local lastUpdateTime = 0
+local updateInterval = 0.1
 
 -- // runservice shit (bad methods :sob:)
 run_service.RenderStepped:Connect(function()
+  local currentTime = tick()
+  if currentTime - lastUpdateTime >= updateInterval then
+      lastUpdateTime = currentTime
       for _,v in next, location_drawings do
             local pos, visible = camera:WorldToViewportPoint(_.CFrame.p)
             local mag = math.floor((_.CFrame.p - camera.CFrame.p).magnitude)
@@ -107,7 +127,6 @@ run_service.RenderStepped:Connect(function()
                   v.Color = settings.location.color or Color3.new(1,1,1)
             end
       end
-      --
       for _,v in next, zombie_drawings do
             if _:FindFirstChild("HumanoidRootPart") then
                   local hrp = _.HumanoidRootPart.Parent.Name
@@ -167,6 +186,19 @@ run_service.RenderStepped:Connect(function()
                   end
             end
       end
+	  for _,v in next, corpses_drawings do
+			if _:FindFirstChild("Head") then
+				local pos, visible = camera:WorldToViewportPoint(_.UpperTorso.Position)
+				local mag = math.floor((_.Head.CFrame.Position - camera.CFrame.p).magnitude)
+				v.Visible = visible and settings.corpses.enabled and (mag <= settings.corpses.distance) and localplayer.Character ~= nil or false
+				if v.Visible then
+					v.Position = Vector2.new(pos.X, pos.Y)
+					v.Text = tostring(_.Name .. " [" .. mag .. " studs]")
+					v.Color = settings.corpses.color or Color3.new(255, 0, 0)
+				end
+            end
+      end
+  end
 end)
 
 -- soon to be rewriten
